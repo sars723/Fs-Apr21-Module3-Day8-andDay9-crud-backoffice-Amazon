@@ -268,21 +268,23 @@
         : "https://striveschool-api.herokuapp.com/api/product/";
       const method = productId ? "PUT" : "POST";
       window.onload = async () => {
-        console.log("Resource ID: ", productId);
+        if (eventId) {
+
         const response = await fetch(endpoint, {
           headers: {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGFlM2YzMGNlYWY0ODAwMTVjOTE4NjkiLCJpYXQiOjE2MjIwMzIxNzYsImV4cCI6MTYyMzI0MTc3Nn0.SqehCMkcxx7C8loTeqkzbhviK47sURBk-aAEpl_67do",
           },
-        });
+        });}
+        populateFields(productDetail)
         const productDetail = await response.json();
-
-        document.getElementById("name").value = productDetail.name;
+        const populateFields = (obj ) => {
+        document.getElementById("name").value = obj.name;
         document.getElementById("description").value =
-          productDetail.description;
-        document.getElementById("brand-name").value = productDetail.brand;
-        document.getElementById("image-url").value = productDetail.imageUrl;
-        document.getElementById("price").value = productDetail.price;
+          obj.description;
+        document.getElementById("brand-name").value = obj.brand;
+        document.getElementById("image-url").value = obj.imageUrl;
+        document.getElementById("price").value = obj.price;
       };
 
       const handleSubmit = async (event) => {
